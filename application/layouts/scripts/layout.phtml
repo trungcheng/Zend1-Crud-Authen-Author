@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Sale Management</title>
+
+	<?= $this->headLink()->appendStylesheet($this->baseUrl('/public/css/bootstrap.min.css')) ?>
+    <?= $this->headLink()->appendStylesheet($this->baseUrl('/public/css/datepicker3.css')) ?>
+    <?= $this->headLink()->appendStylesheet($this->baseUrl('/public/css/styles.css')) ?>
+	<?= $this->headScript()->prependFile($this->baseUrl('/public/js/lumino.glyphs.js')) ?>
+
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#"><span>ZF</span>Connect to MySQL</a>
+				<ul class="user-menu">
+					<li>
+						<?php
+							$auth = Zend_Auth::getInstance();
+					        if ($auth->hasIdentity()) {
+					            $username = $auth->getIdentity()->username;
+						// $session = new Zend_Session_Namespace('access_token');
+      //           		$token = $session->token;
+      //           		$username = $session->username;
+						// if(isset($token)){
+					            
+					        ?>
+					        	<a href="<?php  echo $this->url(array('controller'=>'authentication','action'=>'logout')) ?>" ><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Logout (<?= $username ?>) </a>
+					        <?php
+					        }
+					        else{
+					        ?>
+					        	<a href="<?php  echo $this->url(array('controller'=>'authentication','action'=>'login')) ?>" ><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Login</a>
+					        <?php
+					        }
+					    ?>
+					</li>
+				</ul>
+			</div>
+							
+		</div><!-- /.container-fluid -->
+	</nav>
+		
+	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+		<form role="search">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Search">
+			</div>
+		</form>
+		<ul class="nav menu">
+			<li><a href="<?php  echo $this->url(array('controller'=>'index','action'=>'index')) ?>"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> DashBoard</a></li>
+			<li><a href="<?php  echo $this->url(array('controller'=>'users','action'=>'index')) ?>"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Books Manager</a></li>
+		</ul>
+
+	</div>
+		
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">			
+		<?= $this->layout()->content; ?>		
+	</div><!--/.main-->
+
+	<?= $this->headScript()->prependFile($this->baseUrl('/public/js/jquery-1.11.1.min.js')) ?>
+	<?= $this->headScript()->prependFile($this->baseUrl('/public/js/bootstrap.min.js')) ?>
+	
+</body>
+
+</html>
+
